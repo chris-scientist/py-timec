@@ -4,6 +4,10 @@ import argparse
 # =====================================================================
 # Functions
 
+def compute_basic_nb_days(a_start_date, a_end_date):
+	diff_days = (a_end_date - a_start_date)
+	return diff_days.days
+
 def string2date(string_date):
 	array_date = string_date.split("/")
 	return datetime(int(array_date[2]), int(array_date[1]), int(array_date[0]))
@@ -12,11 +16,14 @@ def display_days_in_year(nb_days):
 	if nb_days > 365 :
 		print("Nb of year: " + str(nb_days / 365.25))
 
-def display(a_start_date, a_end_date, a_diff_day):
+def display(a_start_date, a_end_date):
+	# Compute on dates
+	basic_nb_of_day = compute_basic_nb_days(a_start_date, a_end_date)
+	# Display
 	print("Start date: " + str(a_start_date))
 	print("End date: " + str(a_end_date))
-	print("Nb of days: " + str(a_diff_day.days))
-	display_days_in_year(a_diff_day.days)
+	print("Nb of days: " + str(basic_nb_of_day))
+	display_days_in_year(basic_nb_of_day)
 
 # =====================================================================
 # Script
@@ -44,6 +51,4 @@ if args.end != None:
 
 # Main program
 
-diff_days = (end_date - start_date)
-
-display(start_date, end_date, diff_days)
+display(start_date, end_date)
